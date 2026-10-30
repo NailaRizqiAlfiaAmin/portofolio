@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naila porto 🌸✨ — Portofolio Naila Rizqi Alfia Amin</title>
+    <meta name="description" content="Portofolio lucu & interaktif Naila Rizqi Alfia Amin, Mahasiswa S1 Sistem Informasi UNESA.">
+
+    <!-- Google Fonts: Fredoka, Quicksand, & Comfortaa -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600;700&family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        fredoka: ['Fredoka', 'cursive', 'sans-serif'],
+                        quicksand: ['Quicksand', 'sans-serif'],
+                        comfortaa: ['Comfortaa', 'cursive', 'sans-serif'],
+                    },
+                    colors: {
+                        pastel: {
+                            pink: '#FFC8DD',
+                            hotpink: '#FF85A1',
+                            lavender: '#E8DFF5',
+                            purple: '#B8C0FF',
+                            mint: '#D8F3DC',
+                            yellow: '#FCF6BD',
+                            peach: '#FDE2E4',
+                            blue: '#C0FDFF',
+                            cream: '#FFF9F2',
+                            cardBg: '#FFFFFF',
+                            darkText: '#4A3E3D',
+                        }
+                    },
+                    boxShadow: {
+                        'cute': '0 10px 25px -5px rgba(255, 133, 161, 0.3), 0 8px 10px -6px rgba(184, 192, 255, 0.2)',
+                        'cute-hover': '0 20px 30px -5px rgba(255, 133, 161, 0.4), 0 12px 15px -6px rgba(184, 192, 255, 0.3)',
+                        'bouncy': '0 12px 0px 0px #FFB3C6',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #FFF9F2;
+            color: #4A3E3D;
+            overflow-x: hidden;
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23FF85A1'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>"), auto;
+        }
+
+        /* Cute animations */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(2deg); }
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-4deg); }
+            50% { transform: rotate(4deg); }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px rgba(255, 133, 161, 0.5)); }
+            50% { transform: scale(1.04); filter: drop-shadow(0 0 16px rgba(255, 133, 161, 0.8)); }
+        }
+
+        .animate-float {
+            animation: floatSlow 4s ease-in-out infinite;
+        }
+
+        .animate-wiggle {
+            animation: wiggle 2.5s ease-in-out infinite;
+        }
+
+        .animate-pulse-glow {
+            animation: pulseGlow 3s ease-in-out infinite;
+        }
+
+        /* Sparkle mouse trail element */
+        .sparkle-particle {
+            position: fixed;
+            pointer-events: none;
+            font-size: 14px;
+            z-index: 9999;
+            animation: fadeAndRise 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeAndRise {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-25px) scale(0.3); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFF9F2;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #FFC8DD;
+            border-radius: 20px;
+            border: 3px solid #FFF9F2;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FF85A1;
+        }
+    </style>
+</head>
+<body class="selection:bg-pastel-pink selection:text-pastel-darkText relative">
+
+    <!-- Sparkle Trail Container -->
+    <div id="sparkle-container"></div>
+
+    <!-- Background Cute Pattern Elements -->
+    <div class="fixed top-10 left-5 text-4xl opacity-40 animate-float pointer-events-none -z-10">☁️</div>
+    <div class="fixed top-40 right-10 text-4xl opacity-40 animate-float pointer-events-none -z-10" style="animation-delay: 1.5s;">✨</div>
+    <div class="fixed bottom-20 left-12 text-5xl opacity-30 animate-float pointer-events-none -z-10" style="animation-delay: 2s;">🌸</div>
+    <div class="fixed bottom-40 right-16 text-4xl opacity-30 animate-float pointer-events-none -z-10" style="animation-delay: 0.8s;">🎀</div>
+
+    <!-- Cute Top Navigation -->
+    <header class="sticky top-4 z-40 px-4 max-w-6xl mx-auto">
+        <nav class="bg-white/90 backdrop-blur-md border-4 border-pastel-pink rounded-full px-6 py-3 shadow-cute flex items-center justify-between transition-all">
+            
+            <!-- Logo Badge -->
+            <a href="#" class="flex items-center gap-2 group">
+                <span class="w-10 h-10 rounded-full bg-pastel-pink flex items-center justify-center text-xl font-bold shadow-sm group-hover:scale-110 group-hover:rotate-12 transition-transform">
+                    🌸
+                </span>
+                <span class="font-fredoka font-bold text-xl text-pastel-darkText tracking-wide group-hover:text-pastel-hotpink transition-colors">
+                    Naila<span class="text-pastel-hotpink">.is</span>
+                </span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <div class="hidden md:flex items-center gap-6 font-fredoka text-base font-semibold">
+                <a href="#about" class="px-3 py-1 rounded-full hover:bg-pastel-peach hover:text-pastel-hotpink transition-all">Tentang 🎀</a>
+                <a href="#skills" class="px-3 py-1 rounded-full hover:bg-pastel-lavender hover:text-purple-600 transition-all">Keahlian 🧰</a>
+                <a href="#projects" class="px-3 py-1 rounded-full hover:bg-pastel-mint hover:text-emerald-600 transition-all">Karya 🚀</a>
+                <a href="#boba-corner" class="px-3 py-1 rounded-full hover:bg-pastel-yellow hover:text-amber-700 transition-all">Boba & Mood 🧋</a>
+                <a href="#contact" class="px-3 py-1 rounded-full hover:bg-pastel-blue hover:text-cyan-700 transition-all">Kontak 💌</a>
+            </div>
+
+            <!-- Sound & Interactivity Toggle -->
+            <div class="flex items-center gap-2">
+                <button id="sound-toggle-btn" onclick="toggleAudio()" title="Efek Suara Cute" class="w-10 h-10 rounded-full bg-pastel-yellow border-2 border-amber-300 flex items-center justify-center text-lg shadow-sm hover:scale-110 active:scale-95 transition-all">
+                    🔊
+                </button>
+                <button id="mobile-menu-btn" aria-label="Buka Menu" class="md:hidden w-10 h-10 rounded-full bg-pastel-pink flex items-center justify-center text-slate-700">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="hidden md:hidden mt-2 bg-white border-4 border-pastel-pink rounded-3xl p-6 shadow-cute flex flex-col gap-4 font-fredoka text-center text-lg font-semibold">
+            <a href="#about" class="py-2 rounded-2xl bg-pastel-peach text-pastel-darkText">Tentang 🎀</a>
+            <a href="#skills" class="py-2 rounded-2xl bg-pastel-lavender text-pastel-darkText">Keahlian 🧰</a>
+            <a href="#projects" class="py-2 rounded-2xl bg-pastel-mint text-pastel-darkText">Karya 🚀</a>
+            <a href="#boba-corner" class="py-2 rounded-2xl bg-pastel-yellow text-pastel-darkText">Boba & Mood 🧋</a>
+            <a href="#contact" class="py-2 rounded-2xl bg-pastel-blue text-pastel-darkText">Kontak 💌</a>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 pt-8 pb-16 space-y-24">
+
+        <!-- HERO SECTION -->
+        <section class="min-h-[75vh] flex items-center justify-center pt-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center w-full">
+                
+                <!-- Left Text Column -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white border-2 border-pastel-hotpink text-pastel-hotpink font-fredoka text-sm font-semibold shadow-sm animate-wiggle">
+                        <span>✨ Halo Semua!</span>
+                    </div>
+
+                    <h1 class="font-fredoka text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-wide">
+                        Aku <span class="text-pastel-hotpink underline decoration-wavy decoration-pastel-pink">Naila</span> 🌸✨
+                    </h1>
+
+                    <p class="font-quicksand text-base sm:text-lg font-semibold text-slate-600 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                        Mahasiswa S1 Sistem Informasi @ <span class="bg-pastel-yellow px-2 py-0.5 rounded-md text-amber-900">UNESA</span> 🎓 | Tech Explorer & UI/UX Enthusiast 💻🎨
+                    </p>
+
+                    <p class="text-sm text-slate-500 max-w-lg mx-auto lg:mx-0">
+                        Suka bikin tampilan web yang menarik, merancang sistem informasi yang rapi, dan selalu bersemangat belajar hal-hal baru ditemani secangkir matcha! ✨
+                    </p>
+
+                    <!-- CTAs -->
+                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-4">
+                        <button onclick="triggerConfettiBurst()" class="px-7 py-4 rounded-3xl bg-pastel-hotpink hover:bg-rose-400 text-white font-fredoka font-bold text-lg shadow-bouncy hover:-translate-y-1 active:translate-y-1 transition-all flex items-center gap-2">
+                            <span>Say Hi! 💌</span>
+                        </button>
+
+                        <a href="#projects" class="px-7 py-4 rounded-3xl bg-white border-3 border-pastel-purple text-purple-700 hover:bg-pastel-lavender font-fredoka font-bold text-lg shadow-sm hover:-translate-y-1 transition-all flex items-center gap-2">
+                            <span>Lihat Karya 📂</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Avatar & Floating Badges -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative w-72 h-72 sm:w-80 sm:h-80">
+                        
+                        <!-- Floating Cute Badges -->
+                        <div class="absolute -top-4 -left-4 z-20 px-4 py-2 bg-white border-2 border-pastel-pink rounded-2xl shadow-md font-fredoka text-xs font-bold text-slate-700 animate-float">
+                            ✨ UNESA IS '23 🎓
+                        </div>
+                        <div class="absolute top-1/2 -right-8 z-20 px-4 py-2 bg-white border-2 border-pastel-purple rounded-2xl shadow-md font-fredoka text-xs font-bold text-purple-800 animate-float" style="animation-delay: 1.2s;">
+                            💖 Boba & Code 🧋
+                        </div>
+                        <div class="absolute -bottom-4 left-6 z-20 px-4 py-2 bg-white border-2 border-emerald-300 rounded-2xl shadow-md font-fredoka text-xs font-bold text-emerald-800 animate-float" style="animation-delay: 2s;">
+                            🌟 Ready for Internship!
+                        </div>
+
+                        <!-- Main Illustration Frame -->
+                        <div class="w-full h-full rounded-[3rem] bg-gradient-to-br from-pastel-pink via-pastel-lavender to-pastel-yellow p-4 shadow-cute border-4 border-white animate-pulse-glow flex items-center justify-center relative overflow-hidden">
+                            <div class="w-full h-full rounded-[2.5rem] bg-white flex flex-col items-center justify-center p-6 text-center border-2 border-dashed border-pastel-pink relative">
+                                <!-- Cute Avatar Icon / Emoji -->
+                                <div class="w-32 h-32 rounded-full bg-pastel-peach border-4 border-pastel-pink flex items-center justify-center text-6xl mb-3 shadow-inner">
+                                    👩‍💻
+                                </div>
+                                <h2 class="font-fredoka font-bold text-xl text-pastel-darkText">Naila Rizqi Alfia Amin.</h2>
+                                <p class="font-quicksand text-xs font-bold text-pastel-hotpink">S1 Sistem Informasi UNESA</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FUN FACTS / ABOUT ME -->
+        <section id="about" class="space-y-8">
+            <div class="text-center max-w-xl mx-auto space-y-2">
+                <span class="px-4 py-1.5 rounded-full bg-pastel-peach text-pastel-hotpink font-fredoka text-xs font-bold uppercase tracking-wider">
+                    Sekilas Tentang Ku 🎀
+                </span>
+                <h2 class="font-fredoka text-3xl sm:text-4xl font-bold text-pastel-darkText">
+                    Siapakah Naila? 🌸
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1: Pendidikan -->
+                <div class="bg-white border-4 border-pastel-pink rounded-3xl p-6 shadow-cute hover:-translate-y-2 transition-transform duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-pastel-peach flex items-center justify-center text-2xl mb-4">
+                            🎓
+                        </div>
+                        <h3 class="font-fredoka font-bold text-xl text-slate-800 mb-2">Pendidikan</h3>
+                        <p class="text-sm font-semibold text-pastel-hotpink mb-3">S1 Sistem Informasi — UNESA</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Aktif mendalami Analisis & Perancangan Sistem, Basis Data, serta UI/UX Design di Fakultas Teknik UNESA.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-dashed border-slate-200 flex items-center justify-between text-xs font-bold text-slate-500">
+                        <span>Angkatan 2026</span>
+                        <span class="px-2 py-1 bg-pastel-mint text-emerald-800 rounded-md">Status: Aktif</span>
+                    </div>
+                </div>
+
+                <!-- Card 2: Favorite Tools -->
+                <div class="bg-white border-4 border-pastel-purple rounded-3xl p-6 shadow-cute hover:-translate-y-2 transition-transform duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-pastel-lavender flex items-center justify-center text-2xl mb-4">
+                            🛠️
+                        </div>
+                        <h3 class="font-fredoka font-bold text-xl text-slate-800 mb-2">Tools Favorit</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                            Senjata andalan sehari-hari untuk merancang desain dan mengetik baris kode rapi:
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-pastel-lavender text-purple-900 rounded-full text-xs font-bold">🎨 Figma</span>
+                            <span class="px-3 py-1 bg-pastel-blue text-cyan-900 rounded-full text-xs font-bold">💻 VS Code</span>
+                            <span class="px-3 py-1 bg-pastel-yellow text-amber-900 rounded-full text-xs font-bold">🗄️ Canva</span>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-dashed border-slate-200 text-xs font-bold text-slate-500">
+                        Selalu eksplorasi tools baru! 🚀
+                    </div>
+                </div>
+
+                <!-- Card 3: Hobbies & Fuel -->
+                <div class="bg-white border-4 border-pastel-yellow rounded-3xl p-6 shadow-cute hover:-translate-y-2 transition-transform duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-pastel-yellow flex items-center justify-center text-2xl mb-4">
+                            💖
+                        </div>
+                        <h3 class="font-fredoka font-bold text-xl text-slate-800 mb-2">Hobi & Mood Booster</h3>
+                        <ul class="text-xs text-slate-600 space-y-2 font-semibold">
+                            <li class="flex items-center gap-2">🧋 Minum matcha</li>
+                            <li class="flex items-center gap-2">🎨 Bikin UI Design lucu</li>
+                            <li class="flex items-center gap-2">🍿 Nonton K-Drama pas weekend</li>
+                            <li class="flex items-center gap-2">🎵 Dengerin Musik hindia</li>
+                        </ul>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-dashed border-slate-200 text-xs font-bold text-amber-700">
+                        Happy coding, happy vibes! ✨
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MAGIC TOOLBOX / SKILLS SECTION -->
+        <section id="skills" class="space-y-8 bg-gradient-to-br from-pastel-peach/50 via-pastel-lavender/40 to-pastel-yellow/50 rounded-[3rem] p-8 border-4 border-white shadow-cute">
+            <div class="text-center max-w-xl mx-auto space-y-2">
+                <span class="px-4 py-1.5 rounded-full bg-white text-purple-700 font-fredoka text-xs font-bold uppercase tracking-wider shadow-sm">
+                    Kemampuan Utama 🧰
+                </span>
+                <h2 class="font-fredoka text-3xl sm:text-4xl font-bold text-pastel-darkText">
+                    My Magic Toolbox 🧰✨
+                </h2>
+                <p class="text-xs text-slate-600 font-medium">Kombinasi analisis teknis dan kreativitas visual yang dimiliki Naila.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Skill 1 -->
+                <div class="bg-white rounded-3xl p-5 border-2 border-pastel-pink shadow-sm space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="font-fredoka font-bold text-base text-slate-800 flex items-center gap-2">
+                            🔍 System Analysis
+                        </span>
+                        <span class="text-xs font-bold text-pastel-hotpink">⭐⭐⭐⭐⭐</span>
+                    </div>
+                    <div class="w-full h-3 bg-pastel-peach rounded-full overflow-hidden">
+                        <div class="h-full bg-pastel-hotpink rounded-full w-[88%]"></div>
+                    </div>
+                    <p class="text-[11px] text-slate-500 font-medium">UML, Use Case, Activity Diagram & Flowchart</p>
+                </div>
+
+                <!-- Skill 2 -->
+                <div class="bg-white rounded-3xl p-5 border-2 border-pastel-purple shadow-sm space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="font-fredoka font-bold text-base text-slate-800 flex items-center gap-2">
+                            🎨 UI/UX Design
+                        </span>
+                        <span class="text-xs font-bold text-purple-600">⭐⭐⭐⭐⭐</span>
+                    </div>
+                    <div class="w-full h-3 bg-pastel-lavender rounded-full overflow-hidden">
+                        <div class="h-full bg-purple-400 rounded-full w-[90%]"></div>
+                    </div>
+                    <p class="text-[11px] text-slate-500 font-medium">Figma, Wireframing, Prototyping & User Research</p>
+                </div>
+
+                <!-- Skill 3 -->
+                <div class="bg-white rounded-3xl p-5 border-2 border-pastel-blue shadow-sm space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="font-fredoka font-bold text-base text-slate-800 flex items-center gap-2">
+                            ⚡ HTML / CSS / JS
+                        </span>
+                        <span class="text-xs font-bold text-cyan-600">⭐⭐⭐⭐☆</span>
+                    </div>
+                    <div class="w-full h-3 bg-pastel-blue rounded-full overflow-hidden">
+                        <div class="h-full bg-cyan-400 rounded-full w-[82%]"></div>
+                    </div>
+                    <p class="text-[11px] text-slate-500 font-medium">Responsive Web Design, CSS & DOM Manip</p>
+                </div>
+
+                <div class="bg-white rounded-3xl p-5 border-2 border-pastel-mint shadow-sm space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="font-fredoka font-bold text-base text-slate-800 flex items-center gap-2">
+                            🐍 Python Basics
+                        </span>
+                        <span class="text-xs font-bold text-emerald-600">⭐⭐⭐☆☆</span>
+                    </div>
+                    <div class="w-full h-3 bg-pastel-mint rounded-full overflow-hidden">
+                        <div class="h-full bg-emerald-400 rounded-full w-[75%]"></div>
+                    </div>
+                    <p class="text-[11px] text-slate-500 font-medium">Dasar Algoritma, Logika Pemrograman & Data Handling</p>
+                </div>
+
+                <!-- Skill 6 -->
+                <div class="bg-white rounded-3xl p-5 border-2 border-rose-200 shadow-sm space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="font-fredoka font-bold text-base text-slate-800 flex items-center gap-2">
+                            🤝 Teamwork & Comms
+                        </span>
+                        <span class="text-xs font-bold text-rose-500">⭐⭐⭐⭐⭐</span>
+                    </div>
+                    <div class="w-full h-3 bg-rose-100 rounded-full overflow-hidden">
+                        <div class="h-full bg-rose-400 rounded-full w-[95%]"></div>
+                    </div>
+                    <p class="text-[11px] text-slate-500 font-medium">Kolaborasi Tim, Presentasi & Problem Solving</p>
+                </div>
+
+            </div>
+        </section>
+
+
+                <!-- Mood Today Sticker Picker -->
+                <div class="bg-pastel-lavender/60 border-2 border-dashed border-pastel-purple rounded-3xl p-6 text-center space-y-4">
+                    <div class="text-5xl">🌈</div>
+                    <h3 class="font-fredoka font-bold text-xl text-slate-800">Mood Kamu Hari Ini?</h3>
+                    <p class="text-xs text-slate-600">Pilih salah satu stiker di bawah ini:</p>
+
+                    <div class="flex items-center justify-center gap-3">
+                        <button onclick="selectMood('😊', 'Semangat & Bahagia!')" class="w-12 h-12 rounded-2xl bg-white text-2xl hover:scale-125 transition-transform shadow-sm">😊</button>
+                        <button onclick="selectMood('🚀', 'Siap Menaklukkan Tugas!')" class="w-12 h-12 rounded-2xl bg-white text-2xl hover:scale-125 transition-transform shadow-sm">🚀</button>
+                        <button onclick="selectMood('🌸', 'Calm & Flowy Vibes!')" class="w-12 h-12 rounded-2xl bg-white text-2xl hover:scale-125 transition-transform shadow-sm">🌸</button>
+                        <button onclick="selectMood('😴', 'Butuh Istirahat & matcha!')" class="w-12 h-12 rounded-2xl bg-white text-2xl hover:scale-125 transition-transform shadow-sm">😴</button>
+                        <button onclick="selectMood('🧋', 'Mode Nyantai Sambil Koding!')" class="w-12 h-12 rounded-2xl bg-white text-2xl hover:scale-125 transition-transform shadow-sm">🧋</button>
+                    </div>
+
+                    <div id="mood-response-box" class="min-h-[40px] flex items-center justify-center text-xs font-bold text-purple-900 bg-white/80 rounded-2xl px-4 py-2">
+                        Pilih mood kamu di atas ya! ✨
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CUTE CONTACT SECTION -->
+        <section id="contact" class="space-y-8">
+            <div class="bg-gradient-to-r from-pastel-pink via-pastel-lavender to-pastel-blue border-4 border-white rounded-[3rem] p-8 sm:p-12 shadow-cute">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                    
+                    <!-- Left Contact Info -->
+                    <div class="lg:col-span-5 space-y-6 text-center lg:text-left">
+                        <span class="px-4 py-1.5 rounded-full bg-white text-pastel-hotpink font-fredoka text-xs font-bold uppercase tracking-wider shadow-sm">
+                            Mari Berteman 💌
+                        </span>
+                        <h2 class="font-fredoka text-3xl sm:text-4xl font-bold text-slate-800">
+                            Kirim Pesan Manis! 🌸
+                        </h2>
+                        <p class="text-xs text-slate-600 font-semibold leading-relaxed">
+                            Tertarik untuk berkolaborasi dalam proyek UI/UX, analisis sistem, atau sekadar bertukar ide seputar Sistem Informasi UNESA? Silakan hubungi Nindy!
+                        </p>
+
+                        <div class="space-y-3 pt-2">
+                            <!-- Copy Email Box -->
+                            <div class="bg-white/90 rounded-2xl p-3 flex items-center justify-between border-2 border-white shadow-sm">
+                                <div class="flex items-center gap-2 overflow-hidden">
+                                    <span class="text-xl">📧</span>
+                                    <span id="email-text" class="text-xs font-bold text-slate-700 truncate">rizqialnaila@gmail.com</span>
+                                </div>
+                                <button onclick="copyEmailToClipboard()" class="px-3 py-1.5 rounded-xl bg-pastel-pink hover:bg-pastel-hotpink hover:text-white text-slate-800 font-fredoka text-xs font-bold transition-all shrink-0">
+                                    Salin 📋
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Social Icons -->
+                        <div class="pt-4 flex items-center justify-center lg:justify-start gap-3">
+                            <a href="https://linkedin.com" target="_blank" rel="noopener" title="LinkedIn Naila" class="w-11 h-11 rounded-2xl bg-white border-2 border-pastel-blue flex items-center justify-center text-slate-700 hover:bg-pastel-blue hover:scale-110 transition-all shadow-sm">
+                                <i data-lucide="linkedin" class="w-5 h-5 text-cyan-700"></i>
+                            <a href="https://instagram.com" target="_blank" rel="noopener" title="Instagram nailarizqial" class="w-11 h-11 rounded-2xl bg-white border-2 border-pastel-pink flex items-center justify-center text-slate-700 hover:bg-pastel-peach hover:scale-110 transition-all shadow-sm">
+                                <i data-lucide="instagram" class="w-5 h-5 text-pastel-hotpink"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right Interactive Form -->
+                    <div class="lg:col-span-7 bg-white border-4 border-pastel-pink rounded-3xl p-6 sm:p-8 shadow-sm">
+                        <form onsubmit="handleCuteSubmit(event)" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="contact-name" class="block font-fredoka text-xs font-bold text-slate-700 mb-1">Nama Kamu 🌸</label>
+                                    <input type="text" id="contact-name" required placeholder="Siapa nama kamu?" class="w-full px-4 py-3 rounded-2xl bg-pastel-cream border-2 border-pastel-pink text-slate-800 text-xs font-semibold focus:outline-none focus:border-pastel-hotpink transition-colors">
+                                </div>
+                                <div>
+                                    <label for="contact-email" class="block font-fredoka text-xs font-bold text-slate-700 mb-1">Email Kamu 💌</label>
+                                    <input type="email" id="contact-email" required placeholder="nama@email.com" class="w-full px-4 py-3 rounded-2xl bg-pastel-cream border-2 border-pastel-pink text-slate-800 text-xs font-semibold focus:outline-none focus:border-pastel-hotpink transition-colors">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="contact-msg" class="block font-fredoka text-xs font-bold text-slate-700 mb-1">Pesan Manis Kamu ✨</label>
+                                <textarea id="contact-msg" rows="4" required placeholder="Tuliskan pesan atau sapaan manis kamu di sini..." class="w-full px-4 py-3 rounded-2xl bg-pastel-cream border-2 border-pastel-pink text-slate-800 text-xs font-semibold focus:outline-none focus:border-pastel-hotpink transition-colors resize-none"></textarea>
+                            </div>
+                            <button type="submit" class="w-full py-4 rounded-2xl bg-pastel-hotpink hover:bg-rose-400 text-white font-fredoka font-bold text-sm shadow-bouncy hover:-translate-y-0.5 active:translate-y-1 transition-all">
+                                Kirim Pesan Manis! 💌✨
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t-4 border-pastel-pink bg-white py-8 px-4 text-center">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 font-fredoka text-xs text-slate-600">
+            <p>Dibuat dengan 💖 dan Boba 🧋 oleh <span class="text-pastel-hotpink font-bold">Nindy Ayudia Fatmahlika</span> (SI UNESA)</p>
+            <a href="#" class="hover:text-pastel-hotpink transition-colors">Kembali ke Atas 🌸</a>
+        </div>
+    </footer>
+
+    <!-- CUTE PROJECT MODAL -->
+    <div id="cute-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm">
+        <div class="bg-white border-4 border-pastel-pink w-full max-w-md rounded-[2.5rem] p-6 shadow-2xl relative space-y-4">
+            <button onclick="closeCuteModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-pastel-peach text-slate-700 font-bold flex items-center justify-center hover:bg-pastel-pink transition-colors">
+                ✕
+            </button>
+            <h3 id="modal-title" class="font-fredoka font-bold text-xl text-slate-800 pr-8">Detail Proyek</h3>
+            <p id="modal-desc" class="text-xs text-slate-600 leading-relaxed font-semibold">Deskripsi proyek...</p>
+            <div class="p-3 bg-pastel-lavender/50 rounded-2xl border border-pastel-purple">
+                <span class="block text-[10px] font-fredoka font-bold text-purple-800 uppercase mb-1">Tech Stack & Tools:</span>
+                <span id="modal-tools" class="text-xs font-bold text-slate-700">Figma, HTML, CSS</span>
+            </div>
+            <button onclick="closeCuteModal()" class="w-full py-3 rounded-2xl bg-pastel-hotpink text-white font-fredoka font-bold text-xs shadow-bouncy hover:bg-rose-400 transition-all">
+                Tutup Modals ✨
+            </button>
+        </div>
+    </div>
+
+    <!-- CUTE TOAST NOTIFICATION -->
+    <div id="cute-toast" class="fixed bottom-6 right-6 z-50 hidden bg-white border-4 border-pastel-pink text-slate-800 px-6 py-4 rounded-3xl shadow-cute flex items-center gap-3">
+        <span id="toast-icon" class="text-2xl">🌸</span>
+        <div>
+            <span id="toast-title" class="font-fredoka font-bold text-sm block">Berhasil!</span>
+            <span id="toast-text" class="text-xs text-slate-600 font-semibold">Pesan kamu sudah terkirim!</span>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Audio State & Web Audio API Sound Synth
+        let soundEnabled = true;
+
+        function toggleAudio() {
+            soundEnabled = !soundEnabled;
+            const btn = document.getElementById('sound-toggle-btn');
+            btn.innerText = soundEnabled ? '🔊' : '🔇';
+            showToast(soundEnabled ? 'Suara Diaktifkan 🔊' : 'Suara Dimatikan 🔇', 'Vibes cute siap menemani!');
+        }
+
+        function playCuteSynth(type = 'pop') {
+            if (!soundEnabled) return;
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                if (type === 'pop') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(450, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(900, ctx.currentTime + 0.12);
+                    gain.gain.setValueAtTime(0.3, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.12);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.12);
+                } else if (type === 'boba') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(300, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(700, ctx.currentTime + 0.2);
+                    gain.gain.setValueAtTime(0.4, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.2);
+                }
+            } catch(e) { console.log(e); }
+        }
+
+        // Mouse Sparkle Trail
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() > 0.7) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle-particle';
+                sparkle.innerText = ['✨', '🌸', '💖', '⭐', '☁️'][Math.floor(Math.random()*5)];
+                sparkle.style.left = e.clientX + 'px';
+                sparkle.style.top = e.clientY + 'px';
+                document.getElementById('sparkle-container').appendChild(sparkle);
+                setTimeout(() => sparkle.remove(), 800);
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            playCuteSynth('pop');
+        });
+
+        // Confetti Burst Trigger
+        function triggerConfettiBurst() {
+            playCuteSynth('pop');
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 80,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: ['#FFC8DD', '#FF85A1', '#B8C0FF', '#FCF6BD', '#C0FDFF']
+                });
+            }
+            showToast('Sapaan Diterima! 💌', 'Nindy bilang halo balik buat kamu! ✨');
+        }
+
+        // Boba Counter Logic
+        let bobaCount = 128;
+        function giveBoba() {
+            bobaCount++;
+            document.getElementById('boba-count-display').innerText = bobaCount;
+            playCuteSynth('boba');
+
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 40,
+                    spread: 50,
+                    origin: { y: 0.7 },
+                    colors: ['#FF85A1', '#FCF6BD', '#B8C0FF']
+                });
+            }
+
+            showToast('Boba Dikirim! 🧋✨', 'Terima kasih banyak! Stok boba Nindy bertambah! 💖');
+        }
+
+        // Mood Selection Logic
+        function selectMood(emoji, text) {
+            playCuteSynth('pop');
+            const box = document.getElementById('mood-response-box');
+            box.innerHTML = `<span class="text-lg mr-2">${emoji}</span> Mode kamu saat ini: <strong>${text}</strong>`;
+            showToast(`Mood: ${emoji}`, text);
+        }
+
+        // Project Filter Logic
+        const filterBtns = document.querySelectorAll('.project-filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                playCuteSynth('pop');
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-pastel-hotpink', 'text-white');
+                    b.classList.add('bg-white', 'text-slate-700');
+                });
+
+                btn.classList.remove('bg-white', 'text-slate-700');
+                btn.classList.add('bg-pastel-hotpink', 'text-white');
+
+                const filter = btn.getAttribute('data-filter');
+                projectCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Modal Handlers
+        function openCuteModal(title, desc, tools) {
+            playCuteSynth('pop');
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-desc').innerText = desc;
+            document.getElementById('modal-tools').innerText = tools;
+            document.getElementById('cute-modal').classList.remove('hidden');
+        }
+
+        function closeCuteModal() {
+            playCuteSynth('pop');
+            document.getElementById('cute-modal').classList.add('hidden');
+        }
+
+        // Copy Email Logic
+        function copyEmailToClipboard() {
+            const emailText = document.getElementById('email-text').innerText;
+            const tempInput = document.createElement('input');
+            tempInput.value = emailText;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            playCuteSynth('pop');
+            if (typeof confetti === 'function') {
+                confetti({ particleCount: 30, spread: 40, origin: { y: 0.8 } });
+            }
+            showToast('E-mail Disalin! 📋✨', 'Alamat nindy.ayudia@unesa.ac.id tersimpan di clipboard!');
+        }
+
+        // Form Submit Simulation
+        function handleCuteSubmit(e) {
+            e.preventDefault();
+            playCuteSynth('boba');
+            if (typeof confetti === 'function') {
+                confetti({ particleCount: 100, spread: 80, origin: { y: 0.6 } });
+            }
+            showToast('Pesan Berhasil Terkirim! 💌✨', 'Terima kasih sudah menyapa Nindy! Pesan kamu akan segera dibaca.');
+            e.target.reset();
+        }
+
+        // Custom Cute Toast Helper
+        function showToast(title, message) {
+            const toast = document.getElementById('cute-toast');
+            document.getElementById('toast-title').innerText = title;
+            document.getElementById('toast-text').innerText = message;
+            
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
